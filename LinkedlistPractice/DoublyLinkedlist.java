@@ -1,4 +1,3 @@
-
 public class DoublyLinkedlist {
   Node head;
   Node tail;
@@ -18,7 +17,7 @@ public class DoublyLinkedlist {
     Node newNode = new Node(value);
     this.head = newNode;
     this.tail = newNode;
-    length = 0;
+    length = 1;
   }
 
   public int getLength() {
@@ -39,6 +38,19 @@ public class DoublyLinkedlist {
     length++;
   }
 
+  public void prepend(int value) {
+    Node newNode = new Node(value);
+    if (head == null) {
+      head = newNode;
+      tail = newNode;
+    } else {
+      newNode.next = head;
+      head.prev = newNode;
+      head = newNode;
+    }
+    length++;
+  }
+
   public Node removeLast() {
     if (tail == null) {
       return null;
@@ -55,19 +67,6 @@ public class DoublyLinkedlist {
     }
     length--;
     return temp;
-  }
-
-  public void prepend(int value) {
-    Node newNode = new Node(value);
-    if (head == null) {
-      head = newNode;
-      tail = newNode;
-    } else {
-      newNode.next = head;
-      head.prev = newNode;
-      head = newNode;
-    }
-    length++;
   }
 
   public Node removeFirst() {
@@ -105,6 +104,55 @@ public class DoublyLinkedlist {
       }
     }
     return temp;
+  }
+
+  public boolean setNode(int index, int value) {
+    Node temp = getNode(index);
+
+    if (temp != null) {
+      temp.value = value;
+      return true;
+    }
+    return false;
+  }
+
+  public boolean insertNode(int index, int value) {
+    if (index == length) {
+      append(value);
+      return true;
+    }
+    if (index == 0) {
+      prepend(value);
+      return true;
+    }
+
+
+    Node temp = getNode(index);
+    if (temp == null)
+    return false;
+
+    Node newNode = new Node(value);
+    newNode.prev = temp.prev;
+    newNode.next = temp;
+    newNode.prev.next = newNode;
+    temp.prev = newNode;
+
+    length++;
+    return true;
+  }
+
+  public Node removeNode(int index) {
+    Node temp = getNode(index);
+
+    if(index == 0) return removeFirst();
+    if(index == length-1) return removeLast();
+
+    if(temp != null) {
+      temp.prev.next = temp.next;
+      temp.next.prev = temp.prev;
+      return temp;
+    }
+    return null;
   }
 
   public void printElements() {
