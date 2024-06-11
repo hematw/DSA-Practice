@@ -20,12 +20,12 @@ public class BinarySearchTree extends BinaryTree {
 
         Node temp = root;
 
-        if (temp.data == newNode.data) {
+        if (temp.value == newNode.value) {
             return false;
         }
 
         while (true) {
-            if (newNode.data < temp.data) {
+            if (newNode.value < temp.value) {
                 if (temp.left == null) {
                     temp.left = newNode;
                     return true;
@@ -41,5 +41,20 @@ public class BinarySearchTree extends BinaryTree {
                 }
             }
         }
+    }
+
+    public boolean contains(int value) {
+        Node temp = root;
+
+        while (temp != null) {
+            if (value < temp.value) {
+                temp = temp.left;
+            } else if (value > temp.value) {
+                temp = temp.right;
+            } else {
+                return true;
+            }
+        }
+        return false;
     }
 }
