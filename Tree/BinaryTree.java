@@ -20,7 +20,7 @@ public class BinaryTree {
             return;
         }
 
-        System.out.println(root.data);
+        System.out.println(root.value);
         preOrder(root.left);
         preOrder(root.right);
     }
@@ -32,7 +32,7 @@ public class BinaryTree {
         }
         postOrder(root.left);
         postOrder(root.right);
-        System.out.println(root.data);
+        System.out.println(root.value);
 
     }
 
@@ -43,7 +43,7 @@ public class BinaryTree {
         }
 
         inOrder(root.left);
-        System.out.println(root.data);
+        System.out.println(root.value);
         inOrder(root.right);
     }
 
@@ -65,7 +65,7 @@ public class BinaryTree {
 
         int LNS = sumOfNodes(root.left);
         int RNS = sumOfNodes(root.right);
-        return LNS + RNS + root.data;
+        return LNS + RNS + root.value;
     }
 
     public int getHight(Node root) {
